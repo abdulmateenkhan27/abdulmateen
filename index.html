@@ -478,6 +478,33 @@ h2 { background: linear-gradient(90deg, #fff 30%, #FFE2A6 100%); -webkit-backgro
 #hud[data-state="idle"], #hud[data-state="done"] { display: none; }
 #openbtn.ready { color: #140C00; }
 .holo-body div { animation-duration: .25s; }
+
+/* ---------- social links + message form ---------- */
+.socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 8px; }
+.soc { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,200,120,.07), rgba(255,200,120,.015)); color: var(--ink); transition: transform .45s cubic-bezier(.16,1,.3,1), border-color .45s, box-shadow .45s, color .45s, background .45s; }
+.soc svg { width: 24px; height: 24px; }
+.soc:hover { transform: translateY(-4px); color: #140C00; background: var(--wine); border-color: transparent; box-shadow: 0 10px 30px -10px rgba(255,176,32,.9); }
+.slots { justify-content: center; }
+.msg { width: 100%; max-width: 760px; margin-top: 24px; padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,200,120,.06), rgba(255,200,120,.015)); display: flex; flex-direction: column; gap: 16px; text-align: left; position: relative; }
+.msg::after { content: ""; position: absolute; top: -1px; left: -1px; width: 14px; height: 14px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.msg-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
+.msg-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 14px; }
+.msg label { display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.msg input, .msg textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--line); background: #0B0906; color: var(--ink); font: 400 16px/1.5 var(--body); border-radius: 0; resize: vertical; transition: border-color .4s, box-shadow .4s; }
+.msg input:focus, .msg textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,176,32,.18); }
+.msg .btns { justify-content: flex-end; }
+@media (max-width: 640px) { .msg .btns .btn { width: 100%; } }
+/* ---------- extra smoothness: every transition on the long, soft curve ---------- */
+.btn, .card, .cell, .code, .pill, .slot, .tag, .links a, .soc { transition-timing-function: cubic-bezier(.16,1,.3,1); }
+.building .lyr.on { transition-duration: .95s, .95s; }
+.fx-scroll .sv { transition-duration: 1.05s, 1.05s; }
+.cur { transition-timing-function: cubic-bezier(.16,1,.3,1); }
+
+/* slightly larger portrait in the hero */
+.hero-right { flex: 1.25 1 500px; }
+.hero-right .photo-wrap { flex: 1.45 1 280px; min-height: 380px; }
+.hero-right .code { flex: 1 1 230px; }
+@media (max-width: 640px) { .hero-right .photo-wrap { max-width: 400px; } }
 </style>
 </head>
 <body>
@@ -699,12 +726,31 @@ h2 { background: linear-gradient(90deg, #fff 30%, #FFE2A6 100%); -webkit-backgro
       <a class="mail lyr" href="mailto:mateenkhanmn27@gmail.com">mateenkhanmn27@gmail.com</a>
       <button class="btn primary lyr" id="copy" type="button">COPY EMAIL ADDRESS</button>
     </div>
+    <div class="socials">
+      <a class="soc lyr" href="https://wa.me/8801310946839" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.8A8 8 0 1 1 8.2 19z"></path><path d="M9.5 9.5c.3 2 2 3.7 4 4l1.2-1.2 2 1-.4 1.7c-3.6.6-7.5-3.3-6.9-6.9l1.7-.4 1 2z"></path></svg></a>
+      <a class="soc lyr" href="https://www.youtube.com/@amkframe" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"></rect><path d="M10 9v6l5-3z"></path></svg></a>
+      <a class="soc lyr" href="https://www.instagram.com/being_abdulmateen/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.3" cy="6.7" r="1" fill="currentColor"></circle></svg></a>
+      <a class="soc lyr" href="https://www.facebook.com/nilaterimakichumt" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 8h3V4.5h-3A3.5 3.5 0 0 0 10.5 8v2.5H8V14h2.5v6.5H14V14h2.6l.4-3.5h-3V8z"></path></svg></a>
+      <a class="soc lyr" href="tel:+8801310946839" aria-label="Call 01310946839" title="Phone"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg></a>
+    </div>
     <div class="slots">
-      <a class="slot lyr" href="tel:+8801310946839">PHONE: 01310946839</a>
+      <span class="slot lyr">PHONE: 01310946839</span>
       <span class="slot lyr">GITHUB: COMING SOON</span>
-      <span class="slot lyr">LINKEDIN: COMING SOON</span>
       <span class="slot lyr">DHAKA, BANGLADESH</span>
     </div>
+    <form class="msg lyr" action="https://formsubmit.co/mateenkhanmn27@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New message from your portfolio">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="msg-head"><span class="eyebrow">// SEND A MESSAGE</span><span class="small">Goes straight to my inbox.</span></div>
+      <div class="msg-row">
+        <label><span>Your name</span><input type="text" name="name" required autocomplete="name" placeholder="Name"></label>
+        <label><span>Your email</span><input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
+      </div>
+      <label><span>Message</span><textarea name="message" rows="5" required placeholder="Write something..."></textarea></label>
+      <div class="btns"><button class="btn primary" type="submit">SEND MESSAGE</button></div>
+    </form>
   </div>
   <footer>
     <div class="wrap">
@@ -851,7 +897,7 @@ h2 { background: linear-gradient(90deg, #fff 30%, #FFE2A6 100%); -webkit-backgro
   }
   function move(c, x, y) {
     var d = Math.hypot(x - c._x, y - c._y);
-    var ms = Math.min(780, Math.max(340, d * 1.05)) / speed;
+    var ms = Math.min(900, Math.max(420, d * 1.15)) / speed;
     c.style.transitionDuration = ms + 'ms, 500ms';
     c.style.transform = 'translate(' + x + 'px,' + y + 'px)';
     c._x = x; c._y = y;
