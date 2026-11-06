@@ -6,7 +6,7 @@
 <title>Abdul Mateen Portfolio</title>
 <meta name="description" content="Abdul Mateen Khan is a Computer Science and Engineering student at Tejgaon College, Dhaka, learning C programming and exploring software development, photography and visual content.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;800;900&display=swap">
 <style>
 /* Layout idea: one dark ledger-ruled column, 1200px max, oversized outlined wordmark, mono labels. Single theme by choice. */
 :root {
@@ -282,6 +282,78 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 #aim.scan svg { transform: scale(1.55) rotate(90deg); }
 #aim.hot svg { transform: scale(.6) rotate(45deg); }
 
+/* ---------- futuristic type ---------- */
+:root { --display: 'Orbitron', 'Eurostile', 'Bank Gothic', 'Arial Black', sans-serif; --body: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif; }
+body { font-size: 17px; letter-spacing: .005em; }
+.hero-word { font-weight: 900; font-size: clamp(34px, 11vw, 148px); line-height: 1.1; letter-spacing: .03em; min-height: 1.1em; -webkit-text-stroke-width: 1.5px; }
+h1 { font-weight: 800; font-size: clamp(28px, 4.4vw, 54px); line-height: 1.2; letter-spacing: .05em; padding: 12px 20px; }
+h2 { font-family: var(--display); font-weight: 700; font-size: clamp(24px, 3.3vw, 40px); line-height: 1.25; letter-spacing: .03em; min-height: 1.25em; }
+.contact h2 { font-size: clamp(26px, 3.8vw, 46px); line-height: 1.25; }
+h3 { font-size: 23px; font-weight: 700; letter-spacing: .01em; }
+.hello { font-style: italic; font-weight: 500; letter-spacing: .04em; }
+.card-title, .cell-title { font-weight: 700; letter-spacing: .01em; }
+.brand, .stat b { font-family: var(--display); letter-spacing: .14em; }
+.stat b { font-size: 21px; font-weight: 700; letter-spacing: .06em; }
+.brand b { font-family: var(--display); font-weight: 800; font-size: 12px; }
+.btn, .chip { font-family: var(--display); font-weight: 700; font-size: 11.5px; letter-spacing: .16em; }
+.links a { font-weight: 500; letter-spacing: .06em; text-transform: uppercase; font-size: 13px; }
+.holo-body .ok { font-family: var(--display); }
+
+/* ---------- no control bar ---------- */
+#hud { display: none !important; }
+.contact footer .wrap { padding-bottom: 40px; }
+/* ---------- phone layout ---------- */
+@media (max-width: 640px) {
+  html { scroll-padding-top: 112px; }
+  .top .wrap { padding-block: 8px; gap: 2px 16px; }
+  .status { display: none; }
+  .links { flex-wrap: nowrap; overflow-x: auto; width: 100%; gap: 0 22px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .links::-webkit-scrollbar { display: none; }
+  .links a { white-space: nowrap; padding: 10px 0; }
+  .hero .wrap { padding-block: 24px 40px; }
+  .hero-word { font-size: 12.4vw; }
+  .hero-cols { gap: 32px; }
+  .lede { font-size: 17px; }
+  .btns { width: 100%; }
+  .btns .btn { flex: 1 1 auto; justify-content: center; }
+  .hero-right .photo-wrap { flex: 1 1 100%; max-width: 340px; margin-inline: auto; }
+  .hero-right .code { flex: 1 1 100%; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 28px; gap: 20px 16px; }
+  .sec .wrap { padding-block: 56px; gap: 28px; }
+  .contact .wrap { padding-block: 64px 56px; }
+  .about { gap: 28px; }
+  .card.proj { padding: 22px; }
+  .matrix.five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .five .cell { padding: 20px 16px; gap: 16px; }
+  .cell-title { font-size: 16px; }
+  .slots { width: 100%; }
+  .slot { flex: 1 1 100%; text-align: center; }
+  #bg .blob { width: 360px; height: 360px; }
+  .contact footer .wrap { justify-content: flex-start; }
+}
+
+/* headline is now "HELLO, WORLD" (12 characters) */
+.hero-word { font-size: clamp(26px, 8.4vw, 112px); }
+@media (max-width: 640px) { .hero-word { font-size: 9.3vw; } }
+
+/* ---------- performance pass: animate only transform and opacity ---------- */
+header.top { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(11,11,12,.93); }
+#bg .blob { filter: none; background: radial-gradient(circle, rgba(255,77,77,.17), transparent 68%); }
+.hero-right .photo-wrap { filter: none; box-shadow: 0 0 70px -8px rgba(255,77,77,.55); }
+.building .lyr { opacity: 0; transform: translateY(12px) scale(.985); filter: none; }
+.building .lyr.on { opacity: 1; transform: none; filter: none; transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.building .hero-word.on { filter: drop-shadow(0 0 14px rgba(255,77,77,.55)); }
+.fx-scroll .sv { transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); will-change: opacity, transform; }
+.fx-scroll .sv.card, .fx-scroll .sv.cell, .fx-scroll .sv.code { transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1), border-color .5s, box-shadow .5s, background .5s; }
+.fx-scroll .sv.btn { transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1), background .4s, box-shadow .4s, border-color .4s; }
+.fx-scroll .sv.sv-hide { opacity: 0; filter: none; transform: translateY(28px) scale(.985); }
+.fx-scroll .sv.sv-hide.up { transform: translateY(-28px) scale(.985); }
+.fx-scroll .photo-wrap.sv.sv-hide { box-shadow: none; }
+.cur { will-change: transform; }
+.holo-body div { animation-name: linein2; }
+@keyframes linein2 { from { opacity: 0; transform: translateX(-10px); } }
+.holo-body .wait { animation: linein2 .45s cubic-bezier(.2,.8,.2,1) both, blink 1.1s steps(1) .45s infinite; }
+
 /* ---------- holographic intro screen ---------- */
 #intro { display: none; }
 #intro.show { display: grid; position: fixed; inset: 0; z-index: 60; place-items: center; align-content: center; gap: 28px; background: rgba(11,11,12,.5); perspective: 1200px; transition: opacity .8s ease, visibility .8s; }
@@ -320,6 +392,7 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 .shot-crack { position: fixed; z-index: 62; width: 520px; height: 520px; margin: -260px 0 0 -260px; pointer-events: none; overflow: visible; filter: drop-shadow(0 0 6px rgba(255,77,77,.9)); }
 .shot-crack path { fill: none; stroke: #fff; stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 300; stroke-dashoffset: 300; animation: crack .3s ease-out forwards; }
 @keyframes crack { to { stroke-dashoffset: 0; } }
+#hud[data-state="done"] { display: none; }
 </style>
 </head>
 <body>
@@ -355,11 +428,11 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 
 <section class="hero" id="top">
   <div class="wrap">
-    <div class="hero-word lyr type" aria-hidden="true">PORTFOLIO</div>
+    <div class="hero-word lyr type" aria-hidden="true">HELLO, WORLD</div>
     <div class="hero-cols">
       <div class="hero-left">
         <div>
-          <div class="hello lyr">Hello, I'm</div>
+          <div class="hello lyr">I'm</div>
           <h1 class="lyr type">ABDUL MATEEN.</h1>
         </div>
         <div class="chip lyr"><span class="dot" aria-hidden="true"></span><span>COMPUTER SCIENCE STUDENT</span></div>
@@ -573,9 +646,11 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
     var tx = window.innerWidth / 2, ty = window.innerHeight * 0.72, x = tx, y = ty;
     document.documentElement.classList.add('building');
     intro.classList.add('show');
+    var last = performance.now();
     (function loop() {
       if (!ret.isConnected) return;
-      x += (tx - x) * 0.16; y += (ty - y) * 0.16;
+      var now = performance.now(), k = 1 - Math.pow(1 - 0.16, Math.min(64, now - last) / 16.67); last = now;
+      x += (tx - x) * k; y += (ty - y) * k;
       ret.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
       requestAnimationFrame(loop);
     })();
@@ -628,7 +703,7 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
       if (i >= lines.length) {
         var w = document.createElement('div');
         w.className = 'ok wait';
-        w.textContent = 'TARGET LOCKED. CLICK TO FIRE';
+        w.textContent = (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ? 'TARGET LOCKED. TAP TO FIRE' : 'TARGET LOCKED. CLICK TO FIRE';
         boot.appendChild(w);
         bar.style.width = '100%';
         armed = true;
@@ -826,8 +901,10 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
       var c = e.target.closest && e.target.closest('.card');
       if (c) { var r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); }
     }, { passive: true });
+    var last = performance.now();
     (function loop() {
-      x += (tx - x) * 0.08; y += (ty - y) * 0.08;
+      var now = performance.now(), k = 1 - Math.pow(1 - 0.08, Math.min(64, now - last) / 16.67); last = now;
+      x += (tx - x) * k; y += (ty - y) * k;
       spot.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
       requestAnimationFrame(loop);
     })();
@@ -898,8 +975,10 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   if (hud.dataset.state === 'done') enable();
 
   var tx = window.innerWidth - 60, ty = window.innerHeight / 2, x = tx, y = ty, mouse = false, idle = null;
+  var last = performance.now();
   (function loop() {
-    x += (tx - x) * 0.14; y += (ty - y) * 0.14;
+    var now = performance.now(), k = 1 - Math.pow(1 - 0.14, Math.min(64, now - last) / 16.67); last = now;
+    x += (tx - x) * k; y += (ty - y) * k;
     aim.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
     requestAnimationFrame(loop);
   })();
@@ -917,6 +996,40 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
     clearTimeout(idle);
     idle = setTimeout(function () { aim.classList.remove('scan'); if (!mouse) aim.classList.remove('live'); }, 260);
   }, { passive: true });
+})();
+</script>
+
+<script>
+window.addEventListener('keydown', function (e) {
+  var hud = document.getElementById('hud');
+  if (e.key === 'Escape' && hud && hud.dataset.state === 'run') document.getElementById('skip').click();
+});
+</script>
+
+<script>
+/* inertial wheel scrolling for mouse users; runs at the display's refresh rate */
+(function () {
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+  if (calm || !fine) return;
+  var target = window.scrollY, cur = window.scrollY, active = false, last = 0;
+  function max() { return document.documentElement.scrollHeight - window.innerHeight; }
+  function step(now) {
+    var dt = Math.min(64, now - last); last = now;
+    cur += (target - cur) * (1 - Math.pow(0.86, dt / 16.67));
+    if (Math.abs(target - cur) < 0.4) { cur = target; active = false; }
+    window.scrollTo({ top: cur, left: 0, behavior: 'instant' });
+    if (active) requestAnimationFrame(step);
+  }
+  window.addEventListener('wheel', function (e) {
+    if (e.ctrlKey || document.getElementById('intro')) return;
+    e.preventDefault();
+    if (!active) { target = cur = window.scrollY; }
+    var d = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+    target = Math.max(0, Math.min(max(), target + d));
+    if (!active) { active = true; last = performance.now(); requestAnimationFrame(step); }
+  }, { passive: false });
+  window.addEventListener('scroll', function () { if (!active) { target = cur = window.scrollY; } }, { passive: true });
 })();
 </script>
 
