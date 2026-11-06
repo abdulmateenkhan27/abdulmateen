@@ -492,7 +492,8 @@ h2 { background: linear-gradient(90deg, #fff 30%, #FFE2A6 100%); -webkit-backgro
 .msg label { display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .msg input, .msg textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--line); background: #0B0906; color: var(--ink); font: 400 16px/1.5 var(--body); border-radius: 0; resize: vertical; transition: border-color .4s, box-shadow .4s; }
 .msg input:focus, .msg textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,176,32,.18); }
-.msg .btns { justify-content: flex-end; }
+.msg .btns { justify-content: flex-end; align-items: center; gap: 16px; }
+#msg-note { flex: 1; text-align: right; }
 @media (max-width: 640px) { .msg .btns .btn { width: 100%; } }
 /* ---------- extra smoothness: every transition on the long, soft curve ---------- */
 .btn, .card, .cell, .code, .pill, .slot, .tag, .links a, .soc { transition-timing-function: cubic-bezier(.16,1,.3,1); }
@@ -749,7 +750,7 @@ h2 { background: linear-gradient(90deg, #fff 30%, #FFE2A6 100%); -webkit-backgro
         <label><span>Your email</span><input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
       </div>
       <label><span>Message</span><textarea name="message" rows="5" required placeholder="Write something..."></textarea></label>
-      <div class="btns"><button class="btn primary" type="submit">SEND MESSAGE</button></div>
+      <div class="btns"><span class="small" id="msg-note"></span><button class="btn primary" type="submit" id="msg-send">SEND MESSAGE</button></div>
     </form>
   </div>
   <footer>
@@ -1247,5 +1248,37 @@ window.addEventListener('keydown', function (e) {
 })();
 </script>
 
+
+<script>
+/* message form: sends through FormSubmit without leaving the page; if that is blocked, opens the visitor's own mail app with the message filled in */
+(function () {
+  var form = document.querySelector('form.msg'); if (!form) return;
+  var note = document.getElementById('msg-note'), btn = document.getElementById('msg-send'), TO = 'mateenkhanmn27@gmail.com';
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.name.value.trim(), email = form.email.value.trim(), message = form.message.value.trim();
+    if (!name || !email || !message) return;
+    btn.disabled = true; btn.textContent = 'SENDING...'; note.textContent = '';
+    var body = { name: name, email: email, message: message, _subject: 'Portfolio message from ' + name, _template: 'table', _captcha: 'false' };
+    var fallback = function () {
+      note.textContent = 'Could not send from here. Opening your email app instead.';
+      location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Portfolio message from ' + name) + '&body=' + encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
+      btn.disabled = false; btn.textContent = 'SEND MESSAGE';
+    };
+    var timer = setTimeout(fallback, 9000);
+    fetch('https://formsubmit.co/ajax/' + TO, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        clearTimeout(timer);
+        if (res.ok && (res.j.success === 'true' || res.j.success === true)) {
+          form.reset(); btn.textContent = 'SENT'; note.textContent = 'Thanks! Your message is on its way.';
+          if (window.__sfx && __sfx.chime) __sfx.chime();
+          setTimeout(function () { btn.disabled = false; btn.textContent = 'SEND MESSAGE'; }, 4000);
+        } else { fallback(); }
+      })
+      .catch(function () { clearTimeout(timer); fallback(); });
+  });
+})();
+</script>
 </body>
 </html>
